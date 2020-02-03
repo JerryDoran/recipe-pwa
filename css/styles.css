@@ -22,6 +22,10 @@ nav .sidenav-trigger {
   margin: 0;
 }
 
+.right {
+  cursor: pointer;
+}
+
 /* recipe styles */
 .recipes {
   margin-top: 20px;

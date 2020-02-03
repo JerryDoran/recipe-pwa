@@ -1,7 +1,7 @@
-// Initialize side nav
-const sideNav = document.querySelector('.side-menu');
-M.Sidenav.init(sideNav, {});
-
-// Initialize side form
-const sideForm = document.querySelector('.side-form');
-M.Sidenav.init(sideForm, {});
+// Check to see if the browser supports service workers
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('/sw.js')
+    .then(reg => console.log('Service Worker registered', reg))
+    .catch(err => console.log('Service Worker not registered', err));
+}
