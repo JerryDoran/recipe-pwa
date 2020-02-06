@@ -26,6 +26,11 @@ nav .sidenav-trigger {
   cursor: pointer;
 }
 
+.material-icons {
+  font-size: 20px !important;
+  color: red;
+}
+
 /* recipe styles */
 .recipes {
   margin-top: 20px;
@@ -53,11 +58,26 @@ nav .sidenav-trigger {
   grid-area: details;
   margin-top: 6px;
 }
+
+.recipe-creator {
+  margin-top: 20px;
+}
+
+.recipe-creator .creator {
+  font-weight: bold;
+  display: inline;
+}
+
+.recipe-creator .created-by {
+  display: inline;
+  margin-right: 5px;
+}
 .recipe-delete {
   grid-area: delete;
   position: absolute;
   bottom: 0px;
   right: 0px;
+  cursor: pointer;
 }
 .recipe-delete i {
   font-size: 18px;

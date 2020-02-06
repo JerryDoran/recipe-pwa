@@ -1,6 +1,6 @@
 // Get a reference to the shell resources of the app
-const staticCacheName = 'site-static-v2';
-const dynamicCacheName = 'site-dynamic-v1';
+const staticCacheName = 'site-static-v4';
+const dynamicCacheName = 'site-dynamic-v10';
 
 // Create array of assets that I want cached
 const assets = [
@@ -16,6 +16,17 @@ const assets = [
   'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js',
   'https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2'
 ];
+
+// Cache size limit function
+const limitCacheSize = (name, size) => {
+  caches.open(name).then(cache => {
+    cache.keys().then(keys => {
+      if (keys.length > size) {
+        cache.delete(keys[0]).then(limitCacheSize(name, size));
+      }
+    });
+  });
+};
 
 // Install service worker - self refers to the service worker itself
 self.addEventListener('install', event => {
@@ -48,24 +59,28 @@ self.addEventListener('activate', event => {
 // Fetch event
 self.addEventListener('fetch', event => {
   // console.log('fetch event', event);
-  event.respondWith(
-    caches
-      .match(event.request)
-      .then(cacheRes => {
-        return (
-          cacheRes ||
-          fetch(event.request).then(fetchRes => {
-            return caches.open(dynamicCacheName).then(cache => {
-              cache.put(event.request.url, fetchRes.clone());
-              return fetchRes;
-            });
-          })
-        );
-      })
-      .catch(() => {
-        if (event.request.url.indexOf('.html') > -1) {
-          return caches.match('/pages/fallback.html');
-        }
-      })
-  );
+  if (event.request.url.indexOf('firestore.googleapis.com') === -1) {
+    event.respondWith(
+      caches
+        .match(event.request)
+        .then(cacheRes => {
+          return (
+            cacheRes ||
+            fetch(event.request).then(fetchRes => {
+              return caches.open(dynamicCacheName).then(cache => {
+                cache.put(event.request.url, fetchRes.clone());
+                // Check to see if cache is over a certain size
+                limitCacheSize(dynamicCacheName, 15);
+                return fetchRes;
+              });
+            })
+          );
+        })
+        .catch(() => {
+          if (event.request.url.indexOf('.html') > -1) {
+            return caches.match('/pages/fallback.html');
+          }
+        })
+    );
+  }
 });
