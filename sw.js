@@ -1,5 +1,5 @@
 // Get a reference to the shell resources of the app
-const staticCacheName = 'site-static-v4';
+const staticCacheName = 'site-static-v5';
 const dynamicCacheName = 'site-dynamic-v10';
 
 // Create array of assets that I want cached
