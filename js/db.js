@@ -50,15 +50,18 @@ form.addEventListener('submit', event => {
   form.creator.value = '';
 });
 
-// Delete a recipe
+// Delete a recipe or edit recipe
 const recipeContainer = document.querySelector('.recipes');
 recipeContainer.addEventListener('click', event => {
   console.log(event);
-  if (event.target.tagName === 'I') {
+  if (event.target.innerHTML === 'delete_outline') {
     const id = event.target.getAttribute('data-id');
     console.log(id);
     db.collection('recipes')
       .doc(id)
       .delete();
+  } else if (event.target.innerHTML === 'subject') {
+    const id = event.target.getAttribute('data-id');
+    console.log(id);
   }
 });

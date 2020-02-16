@@ -4,15 +4,25 @@ const recipes = document.querySelector('.recipes');
 const sideNav = document.querySelector('.side-menu');
 M.Sidenav.init(sideNav, {});
 
-// Initialize side form
-const sideForm = document.querySelector('.side-form');
-M.Sidenav.init(sideForm, {});
+// Initialize side form Add
+const sideFormAdd = document.querySelector('.side-form-add');
+M.Sidenav.init(sideFormAdd, {});
+
+// Initialize side form Edit
+const sideFormEdit = document.querySelector('.side-form-edit');
+M.Sidenav.init(sideFormEdit, {});
+
+// Remove recipe from DOM
+const removeRecipe = id => {
+  const recipe = document.querySelector(`.recipe[data-id=${id}]`);
+  recipe.remove();
+};
 
 // Render recipe data
 const renderRecipe = (data, id) => {
   const html = `
   <div class="card-panel recipe white row" data-id="${id}">
-    <img src="/img/dish.png" alt="recipe thumb" />
+    <img src="/img/dish.jpeg" alt="recipe thumb" />
     <div class="recipe-details">
       <div class="recipe-title">${data.title}</div>
       <div class="recipe-ingredients">
@@ -26,6 +36,9 @@ const renderRecipe = (data, id) => {
         <p class="creator">${data.createdby}</p>
       </div>
     </div>
+    <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
+      <i class="material-icons" data-id="${id}">subject</i>
+    </div>
     <div class="recipe-delete">
       <i class="material-icons" data-id="${id}">delete_outline</i>
     </div>
@@ -35,8 +48,13 @@ const renderRecipe = (data, id) => {
   recipes.innerHTML += html;
 };
 
-// Remove recipe from DOM
-const removeRecipe = id => {
-  const recipe = document.querySelector(`.recipe[data-id=${id}]`);
-  recipe.remove();
-};
+// const updateEditForm = id => {
+//   console.log('hey');
+// };
+
+// const editForm = document.querySelector('.recipe-edit');
+// editForm.addEventListener('click', event => {
+//   const id = event.target.getAttribute('data-id');
+//   console.log(id);
+//   updateEditForm(id);
+// });

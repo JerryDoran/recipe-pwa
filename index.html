@@ -46,11 +46,6 @@
       <li><a href="/" class="waves-effect">Home</a></li>
       <li><a href="/pages/about.html" class="waves-effect">About</a></li>
       <li><div class="divider"></div></li>
-      <li>
-        <a href="/pages/contact.html" class="waves-effect">
-          <i class="material-icons">mail_outline</i>Contact
-        </a>
-      </li>
     </ul>
 
     <!-- Recipes -->
@@ -63,14 +58,14 @@
       <a
         href=""
         class="btn-floating btn-small add-btn sidenav-trigger"
-        data-target="side-form"
+        data-target="side-form-add"
       >
         <i class="material-icons">add</i>
       </a>
     </div>
 
-    <!-- Side Form -->
-    <div id="side-form" class="sidenav side-form">
+    <!-- Side Form Add Recipe-->
+    <div id="side-form-add" class="sidenav side-form-add">
       <form class="add-recipe container section">
         <h6>New Recipes</h6>
         <div class="divider"></div>
@@ -92,6 +87,36 @@
         </div>
         <div class="input-field center">
           <button class="btn-small">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Side Form Edit Recipe-->
+    <div id="side-form-edit" class="sidenav side-form-edit">
+      <form class="edit-recipe container section">
+        <h6>Edit Recipe</h6>
+        <div class="divider"></div>
+        <div class="input-field">
+          <input type="text" id="titleEdit" class="validate" />
+          <label for="title-edit">Recipe Name</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="ingredientsEdit" class="validate" />
+          <label for="ingredients-edit">Ingredients</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="instructionsEdit" class="validate" />
+          <label for="instructions-edit">Prep Instructions</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="creatorEdit" class="validate" />
+          <label for="creator-edit">Created By</label>
+        </div>
+        <div class="input-field">
+          <input type="hidden" id="id" />
+        </div>
+        <div class="input-field center">
+          <button class="btn-small">Save</button>
         </div>
       </form>
     </div>
