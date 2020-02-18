@@ -1,8 +1,8 @@
 /* colors */
 :root {
-  --primary: #ffe9d2;
-  --secondary: #ffe1c4;
-  --title: #ff8816;
+  --primary: #055c2c;
+  --secondary: #4c8d67;
+  --title: #fff;
 }
 
 /* layout styles */
@@ -17,13 +17,23 @@ nav a {
 }
 nav a span {
   font-weight: bold;
+  letter-spacing: 2px;
 }
 nav .sidenav-trigger {
   margin: 0;
+  color: #fff;
+}
+
+.label {
+  display: inline-block;
 }
 
 .right {
   cursor: pointer;
+}
+
+.side-form-add {
+  width: 50% !important;
 }
 
 .material-icons {
@@ -31,9 +41,19 @@ nav .sidenav-trigger {
   /* color: red; */
 }
 
+.edit-recipe .input-field {
+  margin: 0;
+}
+
 /* recipe styles */
 .recipes {
   margin-top: 20px;
+}
+
+.recipes h6 {
+  margin: 20px 0;
+  font-weight: bold;
+  font-size: 20px;
 }
 .card-panel.recipe {
   border-radius: 8px;
@@ -61,6 +81,7 @@ nav .sidenav-trigger {
 
 .recipe-creator {
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .recipe-creator .creator {
@@ -69,6 +90,16 @@ nav .sidenav-trigger {
 }
 
 .recipe-creator .created-by {
+  display: inline;
+  margin-right: 5px;
+}
+
+.recipe-date .created-on {
+  display: inline;
+  margin-right: 5px;
+}
+
+.recipe-date .created {
   display: inline;
   margin-right: 5px;
 }
@@ -101,7 +132,7 @@ nav .sidenav-trigger {
 
 /* form-styles */
 .add-btn {
-  background: var(--title) !important;
+  background: var(--secondary) !important;
 }
 input {
   box-shadow: none !important;
@@ -113,4 +144,8 @@ input {
 }
 form .input-field {
   margin-top: 30px;
+}
+
+.edit-recipe h6 {
+  font-size: 20px;
 }

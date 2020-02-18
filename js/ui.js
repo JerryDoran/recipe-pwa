@@ -10,7 +10,6 @@ M.Sidenav.init(sideFormAdd, {});
 
 // Initialize side form Edit
 const sideFormEdit = document.querySelector('.side-form-edit');
-M.Sidenav.init(sideFormEdit, {});
 
 // Remove recipe from DOM
 const removeRecipe = id => {
@@ -35,6 +34,10 @@ const renderRecipe = (data, id) => {
         <p class="created-by">Created by:</p>
         <p class="creator">${data.createdby}</p>
       </div>
+      <div class="recipe-date">
+        <p class="created-on">Date:</p>
+        <p class="created">${data.date}</p>
+      </div>
     </div>
     <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
       <i class="material-icons" data-id="${id}">subject</i>
@@ -48,13 +51,44 @@ const renderRecipe = (data, id) => {
   recipes.innerHTML += html;
 };
 
-// const updateEditForm = id => {
-//   console.log('hey');
-// };
+const renderEditForm = (data, id) => {
+  const html = `
+  <form class="edit-recipe container section">
+    <h6 class="grey-text text-darken-1">Edit Recipe</h6>
+    <div class="divider"></div>
+    <label class="label">Name</label>
+    <div class="input-field">    
+      <input type="text" id="title" class="validate" value="${data.title}" />            
+    </div>
+    <label class="label">Ingredients</label>
+    <div class="input-field">
+      <input type="text" id="ingredients" class="validate" value="${data.ingredients}" />      
+    </div>
+    <label class="label">Instructions</label>
+    <div class="input-field">
+      <input type="text" id="instructions" class="validate" value="${data.instructions}" />      
+    </div>
+    <label class="label">Created by</label>
+    <div class="input-field">
+      <input type="text" id="creator" class="validate" value="${data.createdby}" />      
+    </div>
+    <label class="label">Date</label>
+    <div class="input-field">
+      <input type="text" id="date" class="validate" value="${data.date}" />      
+    </div>
+    <div class="input-field">
+      <input type="hidden" id="id" data-id="${id}" />
+    </div>
+    <div class="input-field center">
+      <button type="submit" class="btn-small">Save</button>
+    </div>
+</form>
+  
+  `;
+  sideFormEdit.innerHTML += html;
+};
 
-// const editForm = document.querySelector('.recipe-edit');
-// editForm.addEventListener('click', event => {
-//   const id = event.target.getAttribute('data-id');
-//   console.log(id);
-//   updateEditForm(id);
-// });
+const onCloseEnd = () => {
+  sideFormEdit.innerHTML = '';
+};
+M.Sidenav.init(sideFormEdit, { onCloseEnd });

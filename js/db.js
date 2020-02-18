@@ -16,7 +16,7 @@ db.collection('recipes').onSnapshot(snapshot => {
   // console.log(snapshot.docChanges());
   snapshot.docChanges().forEach(change => {
     // console.log(change, change.doc.data(), change.doc.id);
-    if (change.type === 'added') {
+    if (change.type === 'added' || change.type === 'modified') {
       // add document data to web page
       renderRecipe(change.doc.data(), change.doc.id);
     }
@@ -37,7 +37,8 @@ form.addEventListener('submit', event => {
     title: form.title.value,
     ingredients: form.ingredients.value,
     instructions: form.instructions.value,
-    createdby: form.creator.value
+    createdby: form.creator.value,
+    date: form.date.value
   };
 
   db.collection('recipes')
@@ -48,20 +49,83 @@ form.addEventListener('submit', event => {
   form.ingredients.value = '';
   form.instructions.value = '';
   form.creator.value = '';
+  form.date.value = '';
 });
 
 // Delete a recipe or edit recipe
 const recipeContainer = document.querySelector('.recipes');
+
 recipeContainer.addEventListener('click', event => {
-  console.log(event);
   if (event.target.innerHTML === 'delete_outline') {
     const id = event.target.getAttribute('data-id');
-    console.log(id);
+    // console.log(id);
     db.collection('recipes')
       .doc(id)
       .delete();
   } else if (event.target.innerHTML === 'subject') {
     const id = event.target.getAttribute('data-id');
-    console.log(id);
+    db.collection('recipes')
+      .doc(id)
+      .get()
+      .then(doc => {
+        const data = doc.data();
+        renderEditForm(data, id);
+        const editRecipeForm = document.querySelector('.edit-recipe');
+        editRecipeForm.addEventListener('submit', event => {
+          // event.preventDefault();
+
+          const recipe = {
+            title: editRecipeForm.title.value,
+            ingredients: editRecipeForm.ingredients.value,
+            instructions: editRecipeForm.instructions.value,
+            createdby: editRecipeForm.creator.value,
+            date: editRecipeForm.date.value
+          };
+          console.log('Should update database now');
+          db.collection('recipes')
+            .doc(id)
+            .update(recipe)
+            .catch(err => console.log(err));
+
+          editRecipeForm.title.value = '';
+          editRecipeForm.ingredients.value = '';
+          editRecipeForm.instructions.value = '';
+          editRecipeForm.creator.value = '';
+          editRecipeForm.date.value = '';
+        });
+      });
+
+    // db.collection('recipes').onSnapshot(snapshot => {
+    //   snapshot.docChanges().forEach(change => {
+    //     if (change.doc.id === id) {
+    //       const data = change.doc.data();
+    //       renderEditForm(data, id);
+    //       const editRecipeForm = document.querySelector('.edit-recipe');
+    //       editRecipeForm.addEventListener('submit', event => {
+    //         event.preventDefault();
+
+    //         const recipe = {
+    //           title: editRecipeForm.title.value,
+    //           ingredients: editRecipeForm.ingredients.value,
+    //           instructions: editRecipeForm.instructions.value,
+    //           createdby: editRecipeForm.creator.value,
+    //           date: editRecipeForm.date.value
+    //         };
+    //         console.log(recipe);
+
+    //         db.collection('recipes')
+    //           .doc(id)
+    //           .update(recipe)
+    //           .catch(err => console.log(err));
+
+    //         editRecipeForm.title.value = '';
+    //         editRecipeForm.ingredients.value = '';
+    //         editRecipeForm.instructions.value = '';
+    //         editRecipeForm.creator.value = '';
+    //         editRecipeForm.date.value = '';
+    //       });
+    //     }
+    //   });
+    // });
   }
 });

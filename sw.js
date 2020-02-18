@@ -1,6 +1,6 @@
 // Get a reference to the shell resources of the app
-const staticCacheName = 'site-static-v39';
-const dynamicCacheName = 'site-dynamic-v21';
+const staticCacheName = 'site-static-v61';
+const dynamicCacheName = 'site-dynamic-v39';
 
 // Create array of assets that I want cached
 const assets = [
@@ -33,7 +33,7 @@ self.addEventListener('install', event => {
   // console.log('service worker has been installed');
   event.waitUntil(
     caches.open(staticCacheName).then(cache => {
-      console.log('caching shell assets');
+      // console.log('caching shell assets');
       cache.addAll(assets);
     })
   );
