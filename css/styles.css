@@ -1,8 +1,8 @@
 /* colors */
 :root {
-  --primary: #055c2c;
-  --secondary: #4c8d67;
-  --title: #fff;
+  --primary: #32055c;
+  --secondary: #9a77bb;
+  --title: #b094ca;
 }
 
 /* layout styles */
@@ -18,6 +18,21 @@ nav a {
 nav a span {
   font-weight: bold;
   letter-spacing: 2px;
+}
+
+.brand {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.dog {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.dog img {
+  width: 200px;
 }
 nav .sidenav-trigger {
   margin: 0;
@@ -148,4 +163,11 @@ form .input-field {
 
 .edit-recipe h6 {
   font-size: 20px;
+}
+
+/* Media Queries */
+@media (min-width: 600px) {
+  .dog img {
+    width: 400px;
+  }
 }
