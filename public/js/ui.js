@@ -21,7 +21,7 @@ const removeRecipe = id => {
 const renderRecipe = (data, id) => {
   const html = `
   <div class="card-panel recipe white row" data-id="${id}">
-    <img src="/img/dish.jpeg" alt="recipe thumb" />
+    <img src="/public/img/dish.jpeg" alt="recipe thumb" />
     <div class="recipe-details">
       <div class="recipe-title">${data.title}</div>
       <div class="recipe-ingredients">
