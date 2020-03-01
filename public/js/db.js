@@ -56,13 +56,13 @@ form.addEventListener('submit', event => {
 const recipeContainer = document.querySelector('.recipes');
 
 recipeContainer.addEventListener('click', event => {
-  if (event.target.innerHTML === 'delete_outline') {
+  if (event.target.innerHTML === 'delete') {
     const id = event.target.getAttribute('data-id');
     // console.log(id);
     db.collection('recipes')
       .doc(id)
       .delete();
-  } else if (event.target.innerHTML === 'subject') {
+  } else if (event.target.innerHTML === 'create') {
     const id = event.target.getAttribute('data-id');
     db.collection('recipes')
       .doc(id)

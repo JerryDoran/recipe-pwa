@@ -21,7 +21,7 @@ const removeRecipe = id => {
 const renderRecipe = (data, id) => {
   const html = `
   <div class="card-panel recipe white row" data-id="${id}">
-    <img src="/public/img/dish.jpeg" alt="recipe thumb" />
+    <img src="/img/dish.jpeg" alt="recipe thumb" />
     <div class="recipe-details">
       <div class="recipe-title">${data.title}</div>
       <div class="recipe-ingredients">
@@ -40,10 +40,10 @@ const renderRecipe = (data, id) => {
       </div>
     </div>
     <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
-      <i class="material-icons" data-id="${id}">subject</i>
+      <i class="material-icons" data-id="${id}">create</i>
     </div>
     <div class="recipe-delete">
-      <i class="material-icons" data-id="${id}">delete_outline</i>
+      <i class="material-icons" data-id="${id}">delete</i>
     </div>
   </div> 
   `;

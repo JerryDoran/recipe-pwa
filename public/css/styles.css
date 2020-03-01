@@ -47,7 +47,8 @@ nav .sidenav-trigger {
   cursor: pointer;
 }
 
-.side-form-add {
+.side-form-add,
+.side-form-edit {
   width: 50% !important;
 }
 

@@ -1,16 +1,16 @@
 // Get a reference to the shell resources of the app
-const staticCacheName = 'site-static-v1';
-const dynamicCacheName = 'site-dynamic-v1';
+const staticCacheName = 'site-static-v15';
+const dynamicCacheName = 'site-dynamic-v3';
 
-// Create array of assets that I want cached
+// Create array of assets that are to be cached.
 const assets = [
   '/',
   '/index.html',
-  '/pages/fallback.html',
+  '/about.html',
+  '/css/styles.css',
   '/js/app.js',
   '/js/ui.js',
-  '/css/styles.css',
-  '/img/dish.png',
+  '/img/dish.jpeg',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
   'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js',
@@ -31,10 +31,10 @@ const limitCacheSize = (name, size) => {
 
 // Install service worker - self refers to the service worker itself
 self.addEventListener('install', event => {
-  // console.log('service worker has been installed');
+  console.log('service worker has been installed');
   event.waitUntil(
     caches.open(staticCacheName).then(cache => {
-      // console.log('caching shell assets');
+      console.log('caching shell assets');
       cache.addAll(assets);
     })
   );
@@ -42,7 +42,7 @@ self.addEventListener('install', event => {
 
 // listen for the activate event of the service worker
 self.addEventListener('activate', event => {
-  // console.log('service worker has been activated');
+  console.log('service worker has been activated');
 
   // Delete old cache
   event.waitUntil(
@@ -71,7 +71,7 @@ self.addEventListener('fetch', event => {
               return caches.open(dynamicCacheName).then(cache => {
                 cache.put(event.request.url, fetchRes.clone());
                 // Check to see if cache is over a certain size
-                limitCacheSize(dynamicCacheName, 15);
+                limitCacheSize(dynamicCacheName, 25);
                 return fetchRes;
               });
             })
