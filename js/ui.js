@@ -88,6 +88,56 @@ const renderEditForm = (data, id) => {
   sideFormEdit.innerHTML += html;
 };
 
+// Search Recipe List
+const filterInput = document.getElementById('filterTitle');
+
+filterInput.addEventListener('keyup', filterNames);
+
+function filterNames() {
+  let filterValue = document.getElementById('filterTitle').value.toUpperCase();
+  let recipes = document.querySelector('.recipes');
+  let card = recipes.querySelectorAll('.card-panel');
+
+  for (let i = 0; i < card.length; i++) {
+    let a = card[i].querySelectorAll('.recipe-title');
+
+    // If matched
+    if (a.innerHTML.toUpperCase().indexOf(filterValue) > -1) {
+      card[i].style.display = '';
+    } else {
+      card[i].style.display = 'none';
+    }
+  }
+}
+
+// Sort Recipe List
+sortButton = document.querySelector('.sort-title');
+sortButton.addEventListener('click', sortRecipes);
+
+function sortRecipes() {
+  let recipes = document.querySelector('.recipes');
+  let cards = recipes.querySelectorAll('.card-panel');
+  let recipeList = [];
+
+  for (let i = 0; i < cards.length; i++) {
+    recipeList.push(cards[i]);
+  }
+
+  recipeList.sort(function(a, b) {
+    console.log(a);
+    let aa = a.querySelector('.recipe-title').innerHTML.toLowerCase();
+    let bb = b.querySelector('.recipe-title').innerHTML.toLowerCase();
+    console.log(aa);
+    console.log(bb);
+
+    return aa > bb ? -1 : aa < bb ? 1 : 0;
+  });
+
+  console.log(recipeList);
+
+  recipes.innerHTML = recipeList;
+}
+
 const onCloseEnd = () => {
   sideFormEdit.innerHTML = '';
 };
