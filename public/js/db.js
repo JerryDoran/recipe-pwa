@@ -81,7 +81,7 @@ recipeContainer.addEventListener('click', event => {
             createdby: editRecipeForm.creator.value,
             date: editRecipeForm.date.value
           };
-          
+
           db.collection('recipes')
             .doc(id)
             .update(recipe)

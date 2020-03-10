@@ -14,6 +14,7 @@ const sideFormEdit = document.querySelector('.side-form-edit');
 // Remove recipe from DOM
 const removeRecipe = id => {
   const recipe = document.querySelector(`.recipe[data-id=${id}]`);
+  console.log(recipe);
   recipe.remove();
 };
 
@@ -144,10 +145,10 @@ const displaySortedRecipesList = recipeList => {
         </div>
       </div>
       <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
-        <i class="material-icons" data-id="${recipe.dataset.id}">subject</i>
+        <i class="material-icons" data-id="${recipe.dataset.id}">create</i>
       </div>
       <div class="recipe-delete">
-        <i class="material-icons" data-id="${recipe.dataset.id}">delete_outline</i>
+        <i class="material-icons" data-id="${recipe.dataset.id}">delete</i>
       </div>
     </div> 
     `;
