@@ -81,7 +81,7 @@ recipeContainer.addEventListener('click', event => {
             createdby: editRecipeForm.creator.value,
             date: editRecipeForm.date.value
           };
-          console.log('Should update database now');
+          
           db.collection('recipes')
             .doc(id)
             .update(recipe)
