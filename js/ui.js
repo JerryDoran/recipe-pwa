@@ -99,7 +99,7 @@ function filterNames() {
   let card = recipes.querySelectorAll('.card-panel');
 
   for (let i = 0; i < card.length; i++) {
-    let a = card[i].querySelectorAll('.recipe-title');
+    let a = card[i].querySelector('.recipe-title');
 
     // If matched
     if (a.innerHTML.toUpperCase().indexOf(filterValue) > -1) {
