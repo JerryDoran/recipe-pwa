@@ -96,46 +96,77 @@ filterInput.addEventListener('keyup', filterNames);
 function filterNames() {
   let filterValue = document.getElementById('filterTitle').value.toUpperCase();
   let recipes = document.querySelector('.recipes');
-  let card = recipes.querySelectorAll('.card-panel');
+  let cards = recipes.querySelectorAll('.card-panel');
 
-  for (let i = 0; i < card.length; i++) {
-    let a = card[i].querySelector('.recipe-title');
+  for (let i = 0; i < cards.length; i++) {
+    let a = cards[i].querySelector('.recipe-title');
 
     // If matched
     if (a.innerHTML.toUpperCase().indexOf(filterValue) > -1) {
-      card[i].style.display = '';
+      cards[i].style.display = '';
     } else {
-      card[i].style.display = 'none';
+      cards[i].style.display = 'none';
     }
   }
 }
 
-// Sort Recipe List
+// Sort Recipe Lists
 sortButton = document.querySelector('.sort-title');
-sortButton.addEventListener('click', sortRecipes);
+let desc = false;
+sortButton.addEventListener('click', () => {
+  let cards = Array.from(recipes.querySelectorAll('.card-panel'));
+  let recipeList = sortRecipes(cards, desc);
+  displaySortedRecipesList(recipeList);
+  desc = !desc;
+});
 
-function sortRecipes() {
-  let recipes = document.querySelector('.recipes');
-  let cards = recipes.querySelectorAll('.card-panel');
-  let recipeList = [];
+const displaySortedRecipesList = recipeList => {
+  recipes.innerHTML = '';
+  recipeList.forEach(recipe => {
+    const html = `
+    <div class="card-panel recipe white row" data-id="${recipe.dataset.id}">
+      <img src="/img/dish.jpeg" alt="recipe thumb" />
+      <div class="recipe-details">
+        <div class="recipe-title">${recipe.childNodes[3].childNodes[1].innerText}</div>
+        <div class="recipe-ingredients">
+          ${recipe.childNodes[3].childNodes[3].innerText}
+        </div>
+        <div class="recipe-instructions">
+          ${recipe.childNodes[3].childNodes[5].innerText}
+        </div>
+        <div class="recipe-creator">
+          
+          <p class="creator">${recipe.childNodes[3].childNodes[7].innerText}</p>
+        </div>
+        <div class="recipe-date">
+          
+          <p class="created">${recipe.childNodes[3].childNodes[9].innerText}</p>
+        </div>
+      </div>
+      <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
+        <i class="material-icons" data-id="${recipe.dataset.id}">subject</i>
+      </div>
+      <div class="recipe-delete">
+        <i class="material-icons" data-id="${recipe.dataset.id}">delete_outline</i>
+      </div>
+    </div> 
+    `;
+    recipes.innerHTML += html;
+  });
+};
 
-  for (let i = 0; i < cards.length; i++) {
-    recipeList.push(cards[i]);
-  }
-
-  recipeList.sort(function(a, b) {
-    console.log(a);
+function sortRecipes(arr, desc) {
+  arr.sort(function(a, b) {
     let aa = a.querySelector('.recipe-title').innerHTML.toLowerCase();
     let bb = b.querySelector('.recipe-title').innerHTML.toLowerCase();
-    console.log(aa);
-    console.log(bb);
-
-    return aa > bb ? -1 : aa < bb ? 1 : 0;
+    if (aa < bb) return -1;
+    if (aa > bb) return 1;
+    return 0;
   });
 
-  console.log(recipeList);
+  if (desc) arr.reverse();
 
-  recipes.innerHTML = recipeList;
+  return arr;
 }
 
 const onCloseEnd = () => {
