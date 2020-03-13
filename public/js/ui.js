@@ -14,6 +14,7 @@ const sideFormEdit = document.querySelector('.side-form-edit');
 // Remove recipe from DOM
 const removeRecipe = id => {
   const recipe = document.querySelector(`.recipe[data-id=${id}]`);
+  console.log(recipe);
   recipe.remove();
 };
 
@@ -21,7 +22,7 @@ const removeRecipe = id => {
 const renderRecipe = (data, id) => {
   const html = `
   <div class="card-panel recipe white row" data-id="${id}">
-    <img src="/img/dish.jpeg" alt="recipe thumb" />
+    <img src="img/dish.jpeg" alt="recipe thumb" />
     <div class="recipe-details">
       <div class="recipe-title">${data.title}</div>
       <div class="recipe-ingredients">
@@ -40,10 +41,10 @@ const renderRecipe = (data, id) => {
       </div>
     </div>
     <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
-      <i class="material-icons" data-id="${id}">subject</i>
+      <i class="material-icons" data-id="${id}">create</i>
     </div>
     <div class="recipe-delete">
-      <i class="material-icons" data-id="${id}">delete_outline</i>
+      <i class="material-icons" data-id="${id}">delete</i>
     </div>
   </div> 
   `;
@@ -125,7 +126,7 @@ const displaySortedRecipesList = recipeList => {
   recipeList.forEach(recipe => {
     const html = `
     <div class="card-panel recipe white row" data-id="${recipe.dataset.id}">
-      <img src="/img/dish.jpeg" alt="recipe thumb" />
+      <img src="img/dish.jpeg" alt="recipe thumb" />
       <div class="recipe-details">
         <div class="recipe-title">${recipe.childNodes[3].childNodes[1].innerText}</div>
         <div class="recipe-ingredients">
@@ -144,10 +145,10 @@ const displaySortedRecipesList = recipeList => {
         </div>
       </div>
       <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
-        <i class="material-icons" data-id="${recipe.dataset.id}">subject</i>
+        <i class="material-icons" data-id="${recipe.dataset.id}">create</i>
       </div>
       <div class="recipe-delete">
-        <i class="material-icons" data-id="${recipe.dataset.id}">delete_outline</i>
+        <i class="material-icons" data-id="${recipe.dataset.id}">delete</i>
       </div>
     </div> 
     `;
