@@ -182,6 +182,7 @@ sortButton.addEventListener('click', () => {
 
 const displaySortedRecipesList = recipeList => {
   recipes.innerHTML = '';
+  console.log(recipeList);
   recipeList.forEach(recipe => {
     const html = `
     <div class="card-panel recipe white row" data-id="${recipe.dataset.id}">
