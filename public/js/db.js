@@ -16,7 +16,7 @@ db.collection('recipes').onSnapshot(snapshot => {
   // console.log(snapshot.docChanges());
   snapshot.docChanges().forEach(change => {
     // console.log(change, change.doc.data(), change.doc.id);
-    if (change.type === 'added' || change.type === 'modified') {
+    if (change.type === 'added') {
       // add document data to web page
       renderRecipe(change.doc.data(), change.doc.id);
     }
@@ -38,7 +38,8 @@ form.addEventListener('submit', event => {
     ingredients: form.ingredients.value,
     instructions: form.instructions.value,
     createdby: form.creator.value,
-    date: form.date.value
+    date: form.date.value,
+    favorite: false
   };
 
   db.collection('recipes')
@@ -52,16 +53,19 @@ form.addEventListener('submit', event => {
   form.date.value = '';
 });
 
-// Delete a recipe or edit recipe
+// Delete a recipe, like or edit recipe
 const recipeContainer = document.querySelector('.recipes');
 
 recipeContainer.addEventListener('click', event => {
   if (event.target.innerHTML === 'delete') {
     const id = event.target.getAttribute('data-id');
-    // console.log(id);
-    db.collection('recipes')
-      .doc(id)
-      .delete();
+    if (confirm('Are you sure you want to delete project?')) {
+      db.collection('recipes')
+        .doc(id)
+        .delete();
+    } else {
+      return;
+    }
   } else if (event.target.innerHTML === 'create') {
     const id = event.target.getAttribute('data-id');
     db.collection('recipes')
@@ -127,5 +131,22 @@ recipeContainer.addEventListener('click', event => {
     //     }
     //   });
     // });
+  } else if (event.target.id === 'heart') {
+    const id = event.target.getAttribute('data-id');
+    event.target.classList.toggle('active');
+    let favoriteChoice;
+    if (event.target.classList.contains('active')) {
+      favoriteChoice = true;
+    } else {
+      favoriteChoice = false;
+    }
+
+    const recipe = {
+      favorite: favoriteChoice
+    };
+    db.collection('recipes')
+      .doc(id)
+      .update(recipe)
+      .catch(err => console.log(err));
   }
 });

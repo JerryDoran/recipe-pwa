@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/6f92449565.js"></script>
     <!-- Materialize CSS -->
     <link
       rel="stylesheet"
@@ -55,19 +57,20 @@
       <button class="sort-title">Sort by name</button>
     </div>
 
-    <div class="recipes container grey-text text-darken-1">
-      <h6 class="center">My Recipes</h6>
-    </div>
-    <!-- Add button -->
-    <div class="center">
-      <a
-        href=""
-        class="btn-floating btn-small add-btn sidenav-trigger"
-        data-target="side-form-add"
-      >
-        <i class="material-icons">add</i>
-      </a>
-    </div>
+    <h6 class="container recipe-head-title">
+      My Recipes
+      <div class="right">
+        <a
+          href=""
+          class="btn-floating btn-small add-btn sidenav-trigger add"
+          data-target="side-form-add"
+        >
+          <i class="material-icons">add</i>
+        </a>
+      </div>
+    </h6>
+
+    <div class="recipes container grey-text text-darken-1"></div>
 
     <!-- Side Form Add Recipe-->
     <div id="side-form-add" class="sidenav side-form-add">

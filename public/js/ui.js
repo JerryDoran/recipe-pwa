@@ -20,7 +20,8 @@ const removeRecipe = id => {
 
 // Render recipe data
 const renderRecipe = (data, id) => {
-  const html = `
+  if (data.favorite === true) {
+    const html = `
   <div class="card-panel recipe white row" data-id="${id}">
     <img src="img/dish.jpeg" alt="recipe thumb" />
     <div class="recipe-details">
@@ -39,17 +40,59 @@ const renderRecipe = (data, id) => {
         <p class="created-on">Date:</p>
         <p class="created">${data.date}</p>
       </div>
-    </div>
+    </div>  
+    
     <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
       <i class="material-icons" data-id="${id}">create</i>
-    </div>
+    </div>  
+    
     <div class="recipe-delete">
       <i class="material-icons" data-id="${id}">delete</i>
     </div>
+    <div class="heart">
+      <i class="fa fa-heart like active" id="heart" data-id="${id}"></i>
+    </div>    
+    
   </div> 
   `;
-
-  recipes.innerHTML += html;
+    recipes.innerHTML += html;
+  } else {
+    const html = `
+  <div class="card-panel recipe white row" data-id="${id}">
+    <img src="img/dish.jpeg" alt="recipe thumb" />
+    <div class="recipe-details">
+      <div class="recipe-title">${data.title}</div>
+      <div class="recipe-ingredients">
+        ${data.ingredients}
+      </div>
+      <div class="recipe-instructions">
+        ${data.instructions}
+      </div>
+      <div class="recipe-creator">
+        <p class="created-by">Created by:</p>
+        <p class="creator">${data.createdby}</p>
+      </div>
+      <div class="recipe-date">
+        <p class="created-on">Date:</p>
+        <p class="created">${data.date}</p>
+      </div>
+    </div>  
+    
+    <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
+      <i class="material-icons" data-id="${id}">create</i>
+    </div>  
+    
+    <div class="recipe-delete">
+      <i class="material-icons" data-id="${id}">delete</i>
+    </div>
+    <div class="heart">
+      <i class="fa fa-heart like" id="heart" data-id="${id}"></i>
+    </div>    
+    
+  </div> 
+  `;
+    recipes.innerHTML += html;
+  }
 };
 
 const renderEditForm = (data, id) => {
@@ -88,6 +131,22 @@ const renderEditForm = (data, id) => {
   `;
   sideFormEdit.innerHTML += html;
 };
+
+// const like = () => {
+//   const card = document.querySelector('.card-panel');
+//   const hearts = card.querySelectorAll('.heart');
+
+//   for (heart of hearts) {
+//     console.log(heart);
+//     heart.addEventListener('click', () => {
+//       if (heart.classList.contains('active')) {
+//         heart.classList.remove('active');
+//       } else {
+//         heart.classList.add('active');
+//       }
+//     });
+//   }
+// };
 
 // Search Recipe List
 const filterInput = document.getElementById('filterTitle');
@@ -150,6 +209,9 @@ const displaySortedRecipesList = recipeList => {
       <div class="recipe-delete">
         <i class="material-icons" data-id="${recipe.dataset.id}">delete</i>
       </div>
+      <div class="heart">
+      <i class="fa fa-heart like" id="heart" data-id="${recipe.dataset.id}"></i>
+    </div>    
     </div> 
     `;
     recipes.innerHTML += html;
