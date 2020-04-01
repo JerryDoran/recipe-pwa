@@ -12,26 +12,28 @@ db.enablePersistence().catch(err => {
 // Real-time listener - listen to this collection and when there is a change
 // I want firestore to send me a snapshot of the changes in the collection at
 // that point in time.
-db.collection('recipes').onSnapshot(snapshot => {
-  // console.log(snapshot.docChanges());
-  snapshot.docChanges().forEach(change => {
-    // console.log(change, change.doc.data(), change.doc.id);
-    if (change.type === 'added') {
-      // add document data to web page
-      renderRecipe(change.doc.data(), change.doc.id);
-    }
+db.collection('recipes')
+  .orderBy('title', 'asc')
+  .onSnapshot(snapshot => {
+    // console.log(snapshot.docChanges());
+    snapshot.docChanges().forEach(change => {
+      // console.log(change, change.doc.data(), change.doc.id);
+      if (change.type === 'added') {
+        // add document data to web page
+        renderRecipe(change.doc.data(), change.doc.id);
+      }
 
-    if (change.type === 'removed') {
-      // remove document data from web page
-      removeRecipe(change.doc.id);
-    }
+      if (change.type === 'removed') {
+        // remove document data from web page
+        removeRecipe(change.doc.id);
+      }
+    });
   });
-});
 
 // Add new recipe
 const form = document.querySelector('form');
 form.addEventListener('submit', event => {
-  event.preventDefault();
+  // event.preventDefault();
 
   const recipe = {
     title: form.title.value,

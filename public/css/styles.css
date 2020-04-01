@@ -79,7 +79,7 @@ nav .sidenav-trigger {
   align-items: center;
 }
 
-.sort-title {
+/* .sort-title {
   border: none;
   opacity: 0.4;
   border-radius: 40px;
@@ -90,7 +90,7 @@ nav .sidenav-trigger {
 .sort-title:focus {
   background-color: rgb(212, 211, 211);
   cursor: pointer;
-}
+} */
 
 .recipes h6 {
   margin: 20px 0;

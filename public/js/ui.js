@@ -1,4 +1,5 @@
 const recipes = document.querySelector('.recipes');
+let html = '';
 
 // Initialize side nav
 const sideNav = document.querySelector('.side-menu');
@@ -20,8 +21,7 @@ const removeRecipe = id => {
 
 // Render recipe data
 const renderRecipe = (data, id) => {
-  if (data.favorite === true) {
-    const html = `
+  html = `
   <div class="card-panel recipe white row" data-id="${id}">
     <img src="img/dish.jpeg" alt="recipe thumb" />
     <div class="recipe-details">
@@ -49,46 +49,20 @@ const renderRecipe = (data, id) => {
     <div class="recipe-delete">
       <i class="material-icons" data-id="${id}">delete</i>
     </div>
+    `;
+  if (data.favorite === true) {
+    html += `
     <div class="heart">
       <i class="fa fa-heart like active" id="heart" data-id="${id}"></i>
     </div>    
-    
   </div> 
   `;
     recipes.innerHTML += html;
   } else {
-    const html = `
-  <div class="card-panel recipe white row" data-id="${id}">
-    <img src="img/dish.jpeg" alt="recipe thumb" />
-    <div class="recipe-details">
-      <div class="recipe-title">${data.title}</div>
-      <div class="recipe-ingredients">
-        ${data.ingredients}
-      </div>
-      <div class="recipe-instructions">
-        ${data.instructions}
-      </div>
-      <div class="recipe-creator">
-        <p class="created-by">Created by:</p>
-        <p class="creator">${data.createdby}</p>
-      </div>
-      <div class="recipe-date">
-        <p class="created-on">Date:</p>
-        <p class="created">${data.date}</p>
-      </div>
-    </div>  
-    
-    <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
-      <i class="material-icons" data-id="${id}">create</i>
-    </div>  
-    
-    <div class="recipe-delete">
-      <i class="material-icons" data-id="${id}">delete</i>
-    </div>
+    html += `  
     <div class="heart">
       <i class="fa fa-heart like" id="heart" data-id="${id}"></i>
     </div>    
-    
   </div> 
   `;
     recipes.innerHTML += html;
@@ -132,22 +106,6 @@ const renderEditForm = (data, id) => {
   sideFormEdit.innerHTML += html;
 };
 
-// const like = () => {
-//   const card = document.querySelector('.card-panel');
-//   const hearts = card.querySelectorAll('.heart');
-
-//   for (heart of hearts) {
-//     console.log(heart);
-//     heart.addEventListener('click', () => {
-//       if (heart.classList.contains('active')) {
-//         heart.classList.remove('active');
-//       } else {
-//         heart.classList.add('active');
-//       }
-//     });
-//   }
-// };
-
 // Search Recipe List
 const filterInput = document.getElementById('filterTitle');
 
@@ -171,67 +129,67 @@ function filterNames() {
 }
 
 // Sort Recipe Lists
-sortButton = document.querySelector('.sort-title');
-let desc = false;
-sortButton.addEventListener('click', () => {
-  let cards = Array.from(recipes.querySelectorAll('.card-panel'));
-  let recipeList = sortRecipes(cards, desc);
-  displaySortedRecipesList(recipeList);
-  desc = !desc;
-});
+// const sortButton = document.querySelector('.sort-title');
+// let desc = false;
+// sortButton.addEventListener('click', () => {
+//   let cards = Array.from(recipes.querySelectorAll('.card-panel'));
+//   let recipeList = sortRecipes(cards, desc);
+//   displaySortedRecipesList(recipeList);
+//   desc = !desc;
+// });
 
-const displaySortedRecipesList = recipeList => {
-  recipes.innerHTML = '';
-  console.log(recipeList);
-  recipeList.forEach(recipe => {
-    const html = `
-    <div class="card-panel recipe white row" data-id="${recipe.dataset.id}">
-      <img src="img/dish.jpeg" alt="recipe thumb" />
-      <div class="recipe-details">
-        <div class="recipe-title">${recipe.childNodes[3].childNodes[1].innerText}</div>
-        <div class="recipe-ingredients">
-          ${recipe.childNodes[3].childNodes[3].innerText}
-        </div>
-        <div class="recipe-instructions">
-          ${recipe.childNodes[3].childNodes[5].innerText}
-        </div>
-        <div class="recipe-creator">
-          
-          <p class="creator">${recipe.childNodes[3].childNodes[7].innerText}</p>
-        </div>
-        <div class="recipe-date">
-          
-          <p class="created">${recipe.childNodes[3].childNodes[9].innerText}</p>
-        </div>
-      </div>
-      <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
-        <i class="material-icons" data-id="${recipe.dataset.id}">create</i>
-      </div>
-      <div class="recipe-delete">
-        <i class="material-icons" data-id="${recipe.dataset.id}">delete</i>
-      </div>
-      <div class="heart">
-      <i class="fa fa-heart like" id="heart" data-id="${recipe.dataset.id}"></i>
-    </div>    
-    </div> 
-    `;
-    recipes.innerHTML += html;
-  });
-};
+// const displaySortedRecipesList = recipeList => {
+//   recipes.innerHTML = '';
+//   console.log(recipeList);
+//   recipeList.forEach(recipe => {
+//     const html = `
+//     <div class="card-panel recipe white row" data-id="${recipe.dataset.id}">
+//       <img src="img/dish.jpeg" alt="recipe thumb" />
+//       <div class="recipe-details">
+//         <div class="recipe-title">${recipe.childNodes[3].childNodes[1].innerText}</div>
+//         <div class="recipe-ingredients">
+//           ${recipe.childNodes[3].childNodes[3].innerText}
+//         </div>
+//         <div class="recipe-instructions">
+//           ${recipe.childNodes[3].childNodes[5].innerText}
+//         </div>
+//         <div class="recipe-creator">
 
-function sortRecipes(arr, desc) {
-  arr.sort(function(a, b) {
-    let aa = a.querySelector('.recipe-title').innerHTML.toLowerCase();
-    let bb = b.querySelector('.recipe-title').innerHTML.toLowerCase();
-    if (aa < bb) return -1;
-    if (aa > bb) return 1;
-    return 0;
-  });
+//           <p class="creator">${recipe.childNodes[3].childNodes[7].innerText}</p>
+//         </div>
+//         <div class="recipe-date">
 
-  if (desc) arr.reverse();
+//           <p class="created">${recipe.childNodes[3].childNodes[9].innerText}</p>
+//         </div>
+//       </div>
+//       <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
+//         <i class="material-icons" data-id="${recipe.dataset.id}">create</i>
+//       </div>
+//       <div class="recipe-delete">
+//         <i class="material-icons" data-id="${recipe.dataset.id}">delete</i>
+//       </div>
+//       <div class="heart">
+//       <i class="fa fa-heart like" id="heart" data-id="${recipe.dataset.id}"></i>
+//     </div>
+//     </div>
+//     `;
+//     recipes.innerHTML += html;
+//   });
+// };
 
-  return arr;
-}
+// function sortRecipes(arr, desc) {
+//   arr.sort(function(a, b) {
+//     let aa = a.querySelector('.recipe-title').innerHTML.toLowerCase();
+//     let bb = b.querySelector('.recipe-title').innerHTML.toLowerCase();
+//     if (aa < bb) return -1;
+//     if (aa > bb) return 1;
+//     return 0;
+//   });
+
+//   if (desc) arr.reverse();
+
+//   return arr;
+// }
 
 const onCloseEnd = () => {
   sideFormEdit.innerHTML = '';
