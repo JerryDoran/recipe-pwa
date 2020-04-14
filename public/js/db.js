@@ -1,5 +1,5 @@
 // Offline data
-db.enablePersistence().catch(err => {
+db.enablePersistence().catch((err) => {
   if (err.code == 'failed-precondition') {
     // probably multiple tabs opened at once
     console.log('persistence failed');
@@ -14,9 +14,9 @@ db.enablePersistence().catch(err => {
 // that point in time.
 db.collection('recipes')
   .orderBy('title', 'asc')
-  .onSnapshot(snapshot => {
+  .onSnapshot((snapshot) => {
     // console.log(snapshot.docChanges());
-    snapshot.docChanges().forEach(change => {
+    snapshot.docChanges().forEach((change) => {
       // console.log(change, change.doc.data(), change.doc.id);
       if (change.type === 'added') {
         // add document data to web page
@@ -32,7 +32,7 @@ db.collection('recipes')
 
 // Add new recipe
 const form = document.querySelector('form');
-form.addEventListener('submit', event => {
+form.addEventListener('submit', (event) => {
   // event.preventDefault();
 
   const recipe = {
@@ -41,12 +41,12 @@ form.addEventListener('submit', event => {
     instructions: form.instructions.value,
     createdby: form.creator.value,
     date: form.date.value,
-    favorite: false
+    favorite: false,
   };
 
   db.collection('recipes')
     .add(recipe)
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 
   form.title.value = '';
   form.ingredients.value = '';
@@ -58,13 +58,11 @@ form.addEventListener('submit', event => {
 // Delete a recipe, like or edit recipe
 const recipeContainer = document.querySelector('.recipes');
 
-recipeContainer.addEventListener('click', event => {
+recipeContainer.addEventListener('click', (event) => {
   if (event.target.innerHTML === 'delete') {
     const id = event.target.getAttribute('data-id');
-    if (confirm('Are you sure you want to delete project?')) {
-      db.collection('recipes')
-        .doc(id)
-        .delete();
+    if (confirm('Are you sure you want to delete recipe?')) {
+      db.collection('recipes').doc(id).delete();
     } else {
       return;
     }
@@ -73,11 +71,11 @@ recipeContainer.addEventListener('click', event => {
     db.collection('recipes')
       .doc(id)
       .get()
-      .then(doc => {
+      .then((doc) => {
         const data = doc.data();
         renderEditForm(data, id);
         const editRecipeForm = document.querySelector('.edit-recipe');
-        editRecipeForm.addEventListener('submit', event => {
+        editRecipeForm.addEventListener('submit', (event) => {
           // event.preventDefault();
 
           const recipe = {
@@ -85,13 +83,13 @@ recipeContainer.addEventListener('click', event => {
             ingredients: editRecipeForm.ingredients.value,
             instructions: editRecipeForm.instructions.value,
             createdby: editRecipeForm.creator.value,
-            date: editRecipeForm.date.value
+            date: editRecipeForm.date.value,
           };
 
           db.collection('recipes')
             .doc(id)
             .update(recipe)
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
 
           editRecipeForm.title.value = '';
           editRecipeForm.ingredients.value = '';
@@ -144,11 +142,11 @@ recipeContainer.addEventListener('click', event => {
     }
 
     const recipe = {
-      favorite: favoriteChoice
+      favorite: favoriteChoice,
     };
     db.collection('recipes')
       .doc(id)
       .update(recipe)
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }
 });

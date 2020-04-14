@@ -161,7 +161,7 @@ nav .sidenav-trigger {
 }
 
 .active {
-  color: var(--secondary);
+  color: rgb(121, 3, 121);
 }
 
 .recipe-delete {
