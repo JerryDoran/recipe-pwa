@@ -1,6 +1,6 @@
 // Get a reference to the shell resources of the app
-const staticCacheName = 'site-static-v4';
-const dynamicCacheName = 'site-dynamic-v4';
+const staticCacheName = 'site-static-v9';
+const dynamicCacheName = 'site-dynamic-v9';
 
 // Create array of assets that are to be cached.
 const assets = [
@@ -16,7 +16,6 @@ const assets = [
   'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js',
   'https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2',
   'https://fonts.googleapis.com/css?family=Merienda+One&display=swap',
-  'https://kit.fontawesome.com/6f92449565.js',
 ];
 
 // Cache size limit function

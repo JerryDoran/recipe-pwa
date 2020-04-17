@@ -22,7 +22,7 @@ const removeRecipe = (id) => {
 // Render recipe data
 const renderRecipe = (data, id) => {
   html = `
-  <div class="card-panel recipe white row" id=${id} data-id="${id}">
+  <div class="card-panel recipe white row" data-id="${id}">
     <img src="img/dish.jpeg" alt="recipe thumb" />
     <div class="recipe-details">
       <div class="recipe-title">${data.title}</div>
@@ -42,7 +42,7 @@ const renderRecipe = (data, id) => {
       </div>
     </div>     
    
-    <div class="recipe-print" onclick="printMe('${id}')">
+    <div class="recipe-print" id=${id} onclick="printMe('${id}')">
       <i class="material-icons">print</i>
     </div>  
     
@@ -74,13 +74,15 @@ const renderRecipe = (data, id) => {
 };
 
 const printMe = (id) => {
-  let recipe = document.getElementById(id);
+  // let recipe = document.getElementById(id);
+  let recipePrint = document.getElementById(id);
+  console.log(recipePrint);
   // recipe.classList.toggle('active-print');
   let printInnerHTML = '<i class="material-icons">print</i>';
-  if (recipe.innerHTML === printInnerHTML) {
-    recipe.innerHTML = '<i class="material-icons">print_disabled</i>';
+  if (recipePrint.innerHTML === printInnerHTML) {
+    recipePrint.innerHTML = '<i class="material-icons">print_disabled</i>';
   } else {
-    recipe.innerHTML = '<i class="material-icons">print</i>';
+    recipePrint.innerHTML = '<i class="material-icons">print</i>';
   }
 };
 
