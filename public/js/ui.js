@@ -40,12 +40,7 @@ const renderRecipe = (data, id) => {
         <p class="created-on">Date:</p>
         <p class="created">${data.date}</p>
       </div>
-    </div>     
-   
-    <div class="recipe-print" id=${id} onclick="printMe('${id}')">
-      <i class="material-icons">print</i>
-    </div>  
-    
+    </div>        
     <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
       <i class="material-icons" data-id="${id}">create</i>
     </div>  
@@ -73,18 +68,22 @@ const renderRecipe = (data, id) => {
   }
 };
 
-const printMe = (id) => {
-  // let recipe = document.getElementById(id);
-  let recipePrint = document.getElementById(id);
-  console.log(recipePrint);
-  // recipe.classList.toggle('active-print');
-  let printInnerHTML = '<i class="material-icons">print</i>';
-  if (recipePrint.innerHTML === printInnerHTML) {
-    recipePrint.innerHTML = '<i class="material-icons">print_disabled</i>';
-  } else {
-    recipePrint.innerHTML = '<i class="material-icons">print</i>';
-  }
-};
+/* <div class="recipe-print" id=${id} onclick="printMe('${id}')">
+      <i class="material-icons">print</i>
+    </div>   */
+
+// const printMe = (id) => {
+//   // let recipe = document.getElementById(id);
+//   let recipePrint = document.getElementById(id);
+//   console.log(recipePrint);
+//   // recipe.classList.toggle('active-print');
+//   let printInnerHTML = '<i class="material-icons">print</i>';
+//   if (recipePrint.innerHTML === printInnerHTML) {
+//     recipePrint.innerHTML = '<i class="material-icons">print_disabled</i>';
+//   } else {
+//     recipePrint.innerHTML = '<i class="material-icons">print</i>';
+//   }
+// };
 
 const renderEditForm = (data, id) => {
   const html = `
