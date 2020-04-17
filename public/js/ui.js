@@ -22,7 +22,7 @@ const removeRecipe = (id) => {
 // Render recipe data
 const renderRecipe = (data, id) => {
   html = `
-  <div class="card-panel recipe white row" data-id="${id}">
+  <div class="card-panel recipe white row" id=${id} data-id="${id}">
     <img src="img/dish.jpeg" alt="recipe thumb" />
     <div class="recipe-details">
       <div class="recipe-title">${data.title}</div>
@@ -42,8 +42,8 @@ const renderRecipe = (data, id) => {
       </div>
     </div>     
    
-    <div class="recipe-print">
-      <i class="material-icons" data-id="${id}">print</i>
+    <div class="recipe-print" onclick="printMe('${id}')">
+      <i class="material-icons">print</i>
     </div>  
     
     <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">
@@ -70,6 +70,17 @@ const renderRecipe = (data, id) => {
   </div> 
   `;
     recipes.innerHTML += html;
+  }
+};
+
+const printMe = (id) => {
+  let recipe = document.getElementById(id);
+  // recipe.classList.toggle('active-print');
+  let printInnerHTML = '<i class="material-icons">print</i>';
+  if (recipe.innerHTML === printInnerHTML) {
+    recipe.innerHTML = '<i class="material-icons">print_disabled</i>';
+  } else {
+    recipe.innerHTML = '<i class="material-icons">print</i>';
   }
 };
 

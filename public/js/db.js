@@ -59,7 +59,6 @@ form.addEventListener('submit', (event) => {
 const recipeContainer = document.querySelector('.recipes');
 
 recipeContainer.addEventListener('click', (event) => {
-  console.log(event.target.parentElement.parentElement.parentElement);
   // Delete a recipe
   if (event.target.innerHTML === 'delete') {
     const id = event.target.getAttribute('data-id');
