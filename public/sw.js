@@ -1,16 +1,16 @@
 // Get a reference to the shell resources of the app
-const staticCacheName = 'site-static-v5';
-const dynamicCacheName = 'site-dynamic-v5';
+const staticCacheName = 'site-static-v2';
+const dynamicCacheName = 'site-dynamic-v2';
 
 // Create array of assets that are to be cached.
 const assets = [
   '/',
-  '/index.html',
-  '/about.html',
-  '/css/styles.css',
-  '/js/app.js',
-  '/js/ui.js',
-  '/img/dish.jpeg',
+  'index.html',
+  'about.html',
+  'css/styles.css',
+  'js/app.js',
+  'js/ui.js',
+  'img/dish.jpeg',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
   'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js',

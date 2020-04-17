@@ -160,6 +160,16 @@ nav .sidenav-trigger {
   right: 0;
 }
 
+.recipe-print {
+  grid-area: like;
+  cursor: pointer;
+  font-size: 20px;
+  color: #817f7f;
+  position: absolute;
+  top: 4px;
+  right: 0;
+}
+
 .active {
   color: rgb(121, 3, 121);
 }

@@ -13,7 +13,7 @@ M.Sidenav.init(sideFormAdd, {});
 const sideFormEdit = document.querySelector('.side-form-edit');
 
 // Remove recipe from DOM
-const removeRecipe = id => {
+const removeRecipe = (id) => {
   const recipe = document.querySelector(`.recipe[data-id=${id}]`);
   console.log(recipe);
   recipe.remove();
@@ -40,6 +40,10 @@ const renderRecipe = (data, id) => {
         <p class="created-on">Date:</p>
         <p class="created">${data.date}</p>
       </div>
+    </div>     
+   
+    <div class="recipe-print">
+      <i class="material-icons" data-id="${id}">print</i>
     </div>  
     
     <div class="recipe-edit sidenav-trigger" data-target="side-form-edit">

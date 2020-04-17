@@ -59,6 +59,8 @@ form.addEventListener('submit', (event) => {
 const recipeContainer = document.querySelector('.recipes');
 
 recipeContainer.addEventListener('click', (event) => {
+  console.log(event.target.parentElement.parentElement.parentElement);
+  // Delete a recipe
   if (event.target.innerHTML === 'delete') {
     const id = event.target.getAttribute('data-id');
     if (confirm('Are you sure you want to delete recipe?')) {
@@ -66,6 +68,7 @@ recipeContainer.addEventListener('click', (event) => {
     } else {
       return;
     }
+    // Create a recipe
   } else if (event.target.innerHTML === 'create') {
     const id = event.target.getAttribute('data-id');
     db.collection('recipes')
@@ -131,6 +134,8 @@ recipeContainer.addEventListener('click', (event) => {
     //     }
     //   });
     // });
+
+    // Add to favorites list
   } else if (event.target.id === 'heart') {
     const id = event.target.getAttribute('data-id');
     event.target.classList.toggle('active');
